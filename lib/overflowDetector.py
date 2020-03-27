@@ -31,7 +31,7 @@ def checkOverflow(binary_name,inputType="STDIN"):
         state.globals['arg'] = arg
 
     state.globals['inputType'] = inputType
-    simgr = p.factory.simgr(state, immutable=False, save_unconstrained=True)
+    simgr = p.factory.simgr(state, save_unconstrained=True)
 
     def overflow_filter(simgr):
 
@@ -135,7 +135,7 @@ def checkOverflow(binary_name,inputType="STDIN"):
     try:
         @timeout_decorator.timeout(120)
         def exploreBinary(simgr):
-            simgr.explore(find=lambda s: 'type' in s.globals,step_func=overflow_filter)
+            simgr.explore(find=lambda s: b'type' in s.globals,step_func=overflow_filter)
 
         exploreBinary(simgr)
         if 'found' in simgr.stashes and len(simgr.found):

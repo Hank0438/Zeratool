@@ -35,6 +35,12 @@ def main():
     properties['file'] = args.file
     print("[+] Checking pwn type...")
     print("[+] Checking for overflow pwn type...")
+
+
+    ### For test ###
+    print(f'args.file: {args.file}')
+    print(f"properties['input_type']: {properties['input_type']}")
+    ### 
     properties['pwn_type'] = overflowDetector.checkOverflow(args.file,inputType=properties['input_type'])
     if properties['pwn_type']['type'] is None:
         print("[+] Checking for format string pwn type...")
